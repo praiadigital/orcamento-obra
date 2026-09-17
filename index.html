@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orçamento de Obra — reforma por m² no litoral | Praia Digital</title>
+<meta name="description" content="Estime o custo de reforma por ambiente, m² e padrão de acabamento — com fator maresia do litoral.">
+<link rel="canonical" href="https://praia.digital/orcamento-obra/">
+<meta name="robots" content="index, follow">
+<style>
+:root{font-family:system-ui,-apple-system,sans-serif}
+body{margin:0;background:#292524;color:#f5f5f4;min-height:100vh}
+.wrap{max-width:680px;margin:0 auto;padding:40px 20px}
+.card{background:#44403c;border:1px solid #78716c;border-radius:16px;padding:24px;margin-top:20px}
+input,select{width:100%;padding:10px;border-radius:10px;border:1px solid #a8a29e;background:#292524;color:#f5f5f4;margin-top:6px;box-sizing:border-box}
+button{background:#fb923c;color:#292524;border:0;padding:12px 18px;border-radius:12px;font-weight:700;cursor:pointer;margin-top:14px}
+label{font-size:14px;font-weight:600;margin-top:12px;display:block}
+.linha{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed #78716c;font-size:14px}
+.destaque{font-size:28px;font-weight:800;color:#fdba74;margin-top:12px}
+.btn{display:inline-block;margin-top:16px;padding:12px 18px;border-radius:12px;background:#0ea5e9;color:#fff;text-decoration:none;font-weight:700}
+small{opacity:.6}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🔨 Orçamento de Obra</h1>
+  <p>Reforma no litoral tem fator maresia: ferragens e acabamentos custam mais. Estime aqui.</p>
+  <div class="card">
+    <label>Ambiente</label>
+    <select id="amb"><option value="1800">Cozinha</option><option value="2200">Banheiro</option><option value="1200">Quarto</option><option value="1100">Sala</option><option value="900">Área externa</option><option value="1300">Imóvel inteiro</option></select>
+    <label>Área (m²)</label><input id="m2" type="number" value="30">
+    <label>Padrão</label>
+    <select id="pad"><option value="0.85">Econômico</option><option value="1" selected>Padrão</option><option value="1.5">Alto padrão</option></select>
+    <label><input type="checkbox" id="maresia" checked style="width:auto"> Frente mar / maresia intensa (+15% em ferragens e pintura)</label>
+    <button onclick="calc()">Estimar orçamento</button>
+    <div id="out"></div>
+  </div>
+  <small>Referência de custo/m² 2026. Veja o retorno da reforma no Reforma ROI.</small><br>
+  <a class="btn" href="https://praiadigital.github.io/reforma-roi/">Reforma ROI</a>
+  <a class="btn" href="https://praiadigital.github.io/decoracao-temporada/">Decoração de Temporada</a>
+  <a class="btn" href="https://praiadigital.github.io/proprietarios/">Proprietários</a>
+</div>
+<script>
+function fmt(v){return v.toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0});}
+function calc(){
+  const amb=+document.getElementById('amb').value,m2=+document.getElementById('m2').value,pad=+document.getElementById('pad').value;
+  const mar=document.getElementById('maresia').checked?1.15:1;
+  const base=amb*m2*pad*mar;
+  const mao=base*0.4, mat=base*0.6, imp=base*0.1;
+  document.getElementById('out').innerHTML='<div style="margin-top:16px">'+
+   '<div class="linha"><span>Materiais</span><b>'+fmt(mat)+'</b></div>'+
+   '<div class="linha"><span>Mão de obra</span><b>'+fmt(mao)+'</b></div>'+
+   '<div class="linha"><span>Imprevistos (10%)</span><b>'+fmt(imp)+'</b></div>'+
+   '<div class="destaque">Total: '+fmt(base+imp)+'</div>'+
+   '<p>Uma reforma desse porte pode valorizar o imóvel em até 2x o investido — confira no Reforma ROI.</p></div>';
+}
+</script>
+<hr style="margin:40px 0 20px;border:none;border-top:1px solid #78716c">
+<nav style="font-size:.95em;text-align:center;padding:0 16px 32px;color:#d6d3d1">
+<strong>Rede Praia Digital:</strong><br>
+<a style="color:#d6d3d1" href="https://praia.digital/">Praia Digital</a> ·
+<a style="color:#d6d3d1" href="https://praiadigital.github.io/apps/">Todos os apps</a> ·
+<a style="color:#d6d3d1" href="https://praiadigital.github.io/reforma-roi/">Reforma ROI</a> ·
+<a style="color:#d6d3d1" href="https://praiadigital.github.io/decoracao-temporada/">Decoração</a> ·
+<a style="color:#d6d3d1" href="https://praiadigital.github.io/calculadora-energia/">Calculadora Solar</a> ·
+<a style="color:#d6d3d1" href="https://praiadigital.github.io/parceiros-hub/">Parceiros</a>
+</nav>
+</body>
+</html>
